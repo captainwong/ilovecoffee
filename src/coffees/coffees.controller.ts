@@ -20,7 +20,7 @@ export class CoffeesController {
   @Get(':id')
   findOne(@Param('id') id: number) {
     console.log(typeof id);
-    return this.coffeesService.findOne('' + id);
+    return this.coffeesService.findOne(id);
   }
 
   @Post()
@@ -30,13 +30,13 @@ export class CoffeesController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCoffeeDto: UpdateCoffeeDto) {
+  update(@Param('id') id: number, @Body() updateCoffeeDto: UpdateCoffeeDto) {
     //return `This action updates #${id} coffee`;
     return this.coffeesService.update(id, updateCoffeeDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: number) {
     //return `This action removes #${id} coffee`;
     return this.coffeesService.remove(id);
   }
