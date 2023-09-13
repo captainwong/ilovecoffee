@@ -1,12 +1,21 @@
-import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
+import { HttpException, HttpStatus, Inject, Injectable, NotFoundException, Scope } from '@nestjs/common';
 import { Coffee, Flavor } from './entities';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DataSource, Repository } from 'typeorm';
 import { CreateCoffeeDto, UpdateCoffeeDto } from './dto';
 import { PaginationQueryDto } from 'src/common';
 import { Event } from 'src/events/entities';
+import { COFFEE_BRANDS } from './conffees.constants';
 
-@Injectable()
+@Injectable({
+  // scope: Scope.TRANSIENT // injectable classes are singletons by default
+
+  // injectable classes will be instantiated per-request,
+  // and will bubble-up, e.g. it will cause CoffeesController to be created 
+  // every request is coming
+  scope: Scope.REQUEST 
+
+}) 
 export class CoffeesService {
   constructor(
     @InjectRepository(Coffee)
@@ -15,8 +24,12 @@ export class CoffeesService {
     @InjectRepository(Flavor)
     private readonly flavorRepository: Repository<Flavor>,
 
-    private readonly dataSource: DataSource
-  ) { }
+    private readonly dataSource: DataSource,
+
+    @Inject(COFFEE_BRANDS) coffeeBrands: string[],
+  ) {
+    console.log('CoffeesService instantiated');
+  }
 
   findAll(paginationQuery: PaginationQueryDto) {
     const { limit, offset } = paginationQuery;
@@ -88,7 +101,7 @@ export class CoffeesService {
       await queryRunner.release();
     }
   }
-  
+
   private async preloadFlavorByName(name: string): Promise<Flavor> {
     const existingFlavor = await this.flavorRepository.findOne({ where: { name } });
     if (existingFlavor) {
