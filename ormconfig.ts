@@ -8,7 +8,7 @@ export default new DataSource({
   password: 'pass123',
   database: 'postgres',
   entities: ['dist/**/*.entity.js'],
-  migrations: ['dist/migrations/*.js'],
+  migrations: ['dist/src/migrations/*.js'],
   migrationsTableName: 'migration',
   
 });

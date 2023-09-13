@@ -30,6 +30,44 @@ Error response from daemon: Ports are not available: exposing port TCP 0.0.0.0:5
 
 try: run `net stop winnat` by `Administrator`.
 
+## pgAdmin 4
+
+### PSQL Tool
+
+#### show tables
+
+```psql
+\dt
+```
+
+example output:
+
+```psql
+postgres=# \dt
+                 List of relations
+ Schema |         Name          | Type  |  Owner
+--------+-----------------------+-------+----------
+ public | coffee                | table | postgres
+ public | coffee_flavors_flavor | table | postgres
+ public | flavor                | table | postgres
+ public | migration             | table | postgres
+(4 rows)
+```
+
+#### desc table
+
+```psql
+\d+ coffee
+\d+ migration
+```
+
+### Query Tool
+
+```sql
+select * from coffee;
+select * from migration;
+```
+
 ## migration
 
 add 
@@ -46,11 +84,23 @@ to `package.json`'s `scripts`.
 yarn run typeorm migration:create src/migrations/CoffeeRefactor
 ```
 
+run `yarn run build` to generate `dist`
+
 ### migrate
 
 ```bash
 yarn run typeorm migration:run -d ./ormconfig.ts
 ```
+
+will add a record to table `migration`
+
+### revert
+
+```bash
+yarn run typeorm migration:revert -d ./ormconfig.ts
+```
+
+will clear table `migration`
 
 
 
