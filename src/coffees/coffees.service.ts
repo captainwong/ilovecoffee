@@ -5,6 +5,7 @@ import { DataSource, Repository } from 'typeorm';
 import { CreateCoffeeDto, UpdateCoffeeDto } from './dto';
 import { PaginationQueryDto } from 'src/common';
 import { Event } from 'src/events/entities';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class CoffeesService {
@@ -15,8 +16,14 @@ export class CoffeesService {
     @InjectRepository(Flavor)
     private readonly flavorRepository: Repository<Flavor>,
 
-    private readonly dataSource: DataSource
-  ) { }
+    private readonly dataSource: DataSource,
+
+    private readonly configService: ConfigService,
+  ) {
+    // const databaseHost = this.configService.get<string>('DATABASE_HOST', 'localhost');
+    const databaseHost = this.configService.get('database.host', 'localhost');
+    console.log(databaseHost);
+  }
 
   findAll(paginationQuery: PaginationQueryDto) {
     const { limit, offset } = paginationQuery;
@@ -88,7 +95,7 @@ export class CoffeesService {
       await queryRunner.release();
     }
   }
-  
+
   private async preloadFlavorByName(name: string): Promise<Flavor> {
     const existingFlavor = await this.flavorRepository.findOne({ where: { name } });
     if (existingFlavor) {

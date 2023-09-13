@@ -5,6 +5,7 @@ import { CoffeesModule } from './coffees/coffees.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
+import appConfig from 'config/app.config';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import * as Joi from 'joi';
         DATABASE_HOST: Joi.required(),
         DATABASE_PORT: Joi.number().default(5432),
       }),
+      load: [appConfig], // we can load other configuration files
     }),
     CoffeesModule,
     TypeOrmModule.forRoot({
