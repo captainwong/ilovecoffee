@@ -1,5 +1,10 @@
 # ilovecoffee
 
+code for [NestJS Fundamentals Course](https://courses.nestjs.com/)
+
+current progress:
+
+`32 Setting up Migrations`
 
 ## flat
 
@@ -9,7 +14,7 @@ run
 nest g class coffees/dto/update-coffee.dto --flat --no-spec
 ```
 
-to avoid folder creation of `update-coffee`
+with `--flat` to avoid folder creation of `update-coffee.dto`
 
 ## docker
 
@@ -24,3 +29,30 @@ Error response from daemon: Ports are not available: exposing port TCP 0.0.0.0:5
 ```
 
 try: run `net stop winnat` by `Administrator`.
+
+## migration
+
+add 
+
+```json
+"typeorm": "ts-node ./node_modules/typeorm/cli"
+```
+
+to `package.json`'s `scripts`.
+
+### create
+
+```bash
+yarn run typeorm migration:create src/migrations/CoffeeRefactor
+```
+
+### migrate
+
+```bash
+yarn run typeorm migration:run -d ./ormconfig.ts
+```
+
+
+
+
+
