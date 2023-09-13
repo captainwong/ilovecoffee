@@ -9,6 +9,18 @@ import appConfig from 'config/app.config';
 
 @Module({
   imports: [
+    TypeOrmModule.forRootAsync({
+      useFactory: () => ({
+        type: 'postgres',
+        host: process.env.DATABASE_HOST, // value from .env file
+        port: +process.env.DATABASE_PORT, // convert string to number
+        username: process.env.DATABASE_USER,
+        password: process.env.DATABASE_PASSWORD,
+        database: process.env.DATABASE_NAME,
+        autoLoadEntities: true, // should not be used in production - it will load all entities at once
+        synchronize: true, // should not be used in production - it will drop the database and recreate it each time
+      }),
+    }),
     // will load and parse .env file, merge key/value pairs from .env file to process.env object,
     // thus make it available to the entire application
     ConfigModule.forRoot({
@@ -21,16 +33,7 @@ import appConfig from 'config/app.config';
       load: [appConfig], // we can load other configuration files
     }),
     CoffeesModule,
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: process.env.DATABASE_HOST, // value from .env file
-      port: +process.env.DATABASE_PORT, // convert string to number
-      username: process.env.DATABASE_USER,
-      password: process.env.DATABASE_PASSWORD,
-      database: process.env.DATABASE_NAME,
-      autoLoadEntities: true, // should not be used in production - it will load all entities at once
-      synchronize: true, // should not be used in production - it will drop the database
-    })],
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
