@@ -6,6 +6,13 @@ current progress:
 
 `32 Setting up Migrations`
 
+## create
+
+```bash
+yarn global add @nestjs/cli
+nest new ilovecoffee -p yarn
+```
+
 ## flat
 
 run
@@ -102,7 +109,15 @@ yarn run typeorm migration:revert -d ./ormconfig.ts
 
 will clear table `migration`
 
+### generate
 
+```bash
+yarn run typeorm migration:generate src/migrations/SchemaSync -d ./ormconfig.ts
+# because I set `migrations: ['dist/src/migrations/*.js'],` in `ormconfig.ts`
+# must build before migrate
+yarn run build
+yarn run typeorm migration:run -d ./ormconfig.ts
+```
 
 
 
