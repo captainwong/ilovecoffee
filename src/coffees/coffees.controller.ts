@@ -17,6 +17,7 @@ import { CreateCoffeeDto, UpdateCoffeeDto } from './dto';
 import { PaginationQueryDto } from '../common';
 import { Public } from 'src/common/decorators/public.decorator';
 import { ParseIntPipe } from 'src/common/pipes/parse-int.pipe';
+import { Protocol } from 'src/common/decorators/protocol.decorator';
 
 
 // @UsePipes(ValidationPipe) // apply the validation pipe to all routes in this controller
@@ -29,8 +30,9 @@ export class CoffeesController {
   @Public()
   @UsePipes(ValidationPipe) // apply the validation pipe to this route only
   @Get()
-  async findAll(@Query() paginationQuery : PaginationQueryDto) {
-    await new Promise(resolve => setTimeout(resolve, 5000));
+  async findAll(@Protocol('https') protocol: string,  @Query() paginationQuery : PaginationQueryDto) {
+    // await new Promise(resolve => setTimeout(resolve, 5000));
+    console.log(protocol);
     return this.coffeesService.findAll(paginationQuery);
   }
 
