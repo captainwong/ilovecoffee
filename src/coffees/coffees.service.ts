@@ -21,13 +21,13 @@ export class CoffeesService {
 
     private readonly dataSource: DataSource,
 
-    @Inject(coffeesConfig.KEY)
-    private readonly coffeesConfiguration: ConfigType<typeof coffeesConfig>,
+    //@Inject(coffeesConfig.KEY)
+    //private readonly coffeesConfiguration: ConfigType<typeof coffeesConfig>,
   ) {
     // const databaseHost = this.configService.get<string>('DATABASE_HOST', 'localhost');
     // const databaseHost = this.configService.get('database.host', 'localhost');
     // const coffeesConfig = this.configService.get('coffees.foo');
-    console.log(coffeesConfiguration.foo);
+    //console.log(coffeesConfiguration.foo);
   }
 
   findAll(paginationQuery: PaginationQueryDto) {
