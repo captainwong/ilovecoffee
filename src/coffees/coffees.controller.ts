@@ -28,7 +28,8 @@ export class CoffeesController {
   @Public()
   @UsePipes(ValidationPipe) // apply the validation pipe to this route only
   @Get()
-  findAll(@Query() paginationQuery : PaginationQueryDto) {
+  async findAll(@Query() paginationQuery : PaginationQueryDto) {
+    await new Promise(resolve => setTimeout(resolve, 5000));
     return this.coffeesService.findAll(paginationQuery);
   }
 

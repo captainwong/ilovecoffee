@@ -2,10 +2,6 @@
 
 code for [NestJS Fundamentals Course](https://courses.nestjs.com/)
 
-current progress:
-
-`32 Setting up Migrations`
-
 ## create
 
 ```bash
