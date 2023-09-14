@@ -1,7 +1,21 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post, Query, UsePipes, ValidationPipe } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode, HttpStatus,
+  Param,
+  Patch,
+  Post,
+  Query,
+  SetMetadata,
+  UsePipes,
+  ValidationPipe
+} from '@nestjs/common';
 import { CoffeesService } from './coffees.service';
 import { CreateCoffeeDto, UpdateCoffeeDto } from './dto';
 import { PaginationQueryDto } from '../common';
+import { Public } from 'src/common/decorators/public.decorator';
 
 
 // @UsePipes(ValidationPipe) // apply the validation pipe to all routes in this controller
@@ -11,7 +25,7 @@ export class CoffeesController {
 
   }
 
-  
+  @Public()
   @UsePipes(ValidationPipe) // apply the validation pipe to this route only
   @Get()
   findAll(@Query() paginationQuery : PaginationQueryDto) {
