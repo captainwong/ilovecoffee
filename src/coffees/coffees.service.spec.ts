@@ -10,6 +10,7 @@ describe('CoffeesService', () => {
     }).compile();
 
     service = module.get<CoffeesService>(CoffeesService);
+    // service = module.resolve<CoffeesService>(CoffeesService); // if CoffeesService is TRANSIENT
   });
 
   it('should be defined', () => {

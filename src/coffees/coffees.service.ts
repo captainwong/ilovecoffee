@@ -1,10 +1,12 @@
 import { HttpException, HttpStatus, Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { Coffee, Flavor } from './entities';
+import { Coffee } from './entities/coffee.entity';
+import { Flavor } from './entities/flavor.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DataSource, Repository } from 'typeorm';
-import { CreateCoffeeDto, UpdateCoffeeDto } from './dto';
-import { PaginationQueryDto } from 'src/common';
-import { Event } from 'src/events/entities';
+import { CreateCoffeeDto } from './dto/create-coffee.dto';
+import { UpdateCoffeeDto } from './dto/update-coffee.dto';
+import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
+import { Event } from '../events/entities/event.entity';
 import { ConfigService, ConfigType } from '@nestjs/config';
 import coffeesConfig from './config/coffees.config';
 
