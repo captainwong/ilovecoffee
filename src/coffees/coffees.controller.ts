@@ -18,8 +18,9 @@ import { PaginationQueryDto } from '../common';
 import { Public } from 'src/common/decorators/public.decorator';
 import { ParseIntPipe } from 'src/common/pipes/parse-int.pipe';
 import { Protocol } from 'src/common/decorators/protocol.decorator';
+import { ApiForbiddenResponse, ApiTags } from '@nestjs/swagger';
 
-
+@ApiTags('coffees')
 // @UsePipes(ValidationPipe) // apply the validation pipe to all routes in this controller
 @Controller('coffees')
 export class CoffeesController {
@@ -27,6 +28,7 @@ export class CoffeesController {
 
   }
 
+  @ApiForbiddenResponse({ description: 'Forbidden.' })
   @Public()
   @UsePipes(ValidationPipe) // apply the validation pipe to this route only
   @Get()
