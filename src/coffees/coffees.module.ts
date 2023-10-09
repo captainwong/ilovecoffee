@@ -8,13 +8,12 @@ import { Event } from '../events/entities/event.entity';
 import { ConfigModule } from '@nestjs/config';
 import coffeesConfig from './config/coffees.config';
 
-
 @Module({
   imports: [
     TypeOrmModule.forFeature([Coffee, Flavor, Event]),
-    ConfigModule.forFeature(coffeesConfig)
+    ConfigModule.forFeature(coffeesConfig),
   ],
   controllers: [CoffeesController],
-  providers: [CoffeesService]
+  providers: [CoffeesService],
 })
-export class CoffeesModule { }
+export class CoffeesModule {}

@@ -1,8 +1,7 @@
-import { Type } from "class-transformer";
-import { IsOptional, IsPositive } from "class-validator";
+import { Type } from 'class-transformer';
+import { IsOptional, IsPositive } from 'class-validator';
 
 export class PaginationQueryDto {
-
   /*
   with 
   
@@ -20,10 +19,10 @@ export class PaginationQueryDto {
   @IsOptional()
   @IsPositive()
   // @Type(() => Number)
-  limit : number;
+  limit: number;
 
   @IsOptional()
   @IsPositive()
   // @Type(() => Number)
-  offset : number;
+  offset: number;
 }

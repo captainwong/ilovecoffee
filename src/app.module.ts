@@ -46,5 +46,4 @@ import { CommonModule } from './common/common.module';
     // }
   ],
 })
-export class AppModule { }
-
+export class AppModule {}

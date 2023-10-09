@@ -3,14 +3,15 @@ import {
   Controller,
   Delete,
   Get,
-  HttpCode, HttpStatus,
+  HttpCode,
+  HttpStatus,
   Param,
   Patch,
   Post,
   Query,
   SetMetadata,
   UsePipes,
-  ValidationPipe
+  ValidationPipe,
 } from '@nestjs/common';
 import { CoffeesService } from './coffees.service';
 import { CreateCoffeeDto } from './dto/create-coffee.dto';
@@ -25,15 +26,16 @@ import { ApiForbiddenResponse, ApiTags } from '@nestjs/swagger';
 // @UsePipes(ValidationPipe) // apply the validation pipe to all routes in this controller
 @Controller('coffees')
 export class CoffeesController {
-  constructor(private readonly coffeesService: CoffeesService) {
-
-  }
+  constructor(private readonly coffeesService: CoffeesService) {}
 
   @ApiForbiddenResponse({ description: 'Forbidden.' })
   @Public()
   @UsePipes(ValidationPipe) // apply the validation pipe to this route only
   @Get()
-  async findAll(@Protocol('https') protocol: string,  @Query() paginationQuery : PaginationQueryDto) {
+  async findAll(
+    @Protocol('https') protocol: string,
+    @Query() paginationQuery: PaginationQueryDto,
+  ) {
     // await new Promise(resolve => setTimeout(resolve, 5000));
     console.log(protocol);
     return this.coffeesService.findAll(paginationQuery);
@@ -46,13 +48,16 @@ export class CoffeesController {
   }
 
   @Post()
-  create(@Body() createCoffeeDto : CreateCoffeeDto) {
+  create(@Body() createCoffeeDto: CreateCoffeeDto) {
     return this.coffeesService.create(createCoffeeDto);
   }
 
   @Patch(':id')
   // @Body(ValidationPipe) // apply the validation pipe to Body only
-  update(@Param('id') id: number, @Body(ValidationPipe) updateCoffeeDto: UpdateCoffeeDto) {
+  update(
+    @Param('id') id: number,
+    @Body(ValidationPipe) updateCoffeeDto: UpdateCoffeeDto,
+  ) {
     return this.coffeesService.update(id, updateCoffeeDto);
   }
 

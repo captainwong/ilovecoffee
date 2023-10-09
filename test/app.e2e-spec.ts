@@ -22,9 +22,8 @@ describe('AppController (e2e)', () => {
       .expect(200)
       .expect('Hello Nest!');
   });
-  
+
   afterAll(async () => {
     await app.close();
   });
-    
 });

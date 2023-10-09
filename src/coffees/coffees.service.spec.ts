@@ -24,8 +24,14 @@ describe('CoffeesService', () => {
       providers: [
         CoffeesService,
         { provide: DataSource, useValue: {} }, // mock
-        { provide: getRepositoryToken(Flavor), useValue: createMockRepository() }, // mock
-        { provide: getRepositoryToken(Coffee), useValue: createMockRepository() }, // mock
+        {
+          provide: getRepositoryToken(Flavor),
+          useValue: createMockRepository(),
+        }, // mock
+        {
+          provide: getRepositoryToken(Coffee),
+          useValue: createMockRepository(),
+        }, // mock
       ],
     }).compile();
 
@@ -61,8 +67,5 @@ describe('CoffeesService', () => {
         }
       });
     });
-
   });
-
 });
-
